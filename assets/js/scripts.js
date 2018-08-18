@@ -25,13 +25,35 @@ guessBtn.addEventListener('click', function() {
     }
     // Check if number
     if(guess === winningNum) {
+        // Game over - Won
         // Disable input
         guessInput.disabled = true;
         // Chance border color
         guessInput.style.borderColor = 'green';
+        // Set message
         setMessage(`${winningNum} is correct, YOU WIN!`, );`green`
     } else {
+        // Wrong number
+        guessesLeft -= 1;
 
+        if(guessesLeft === 0) {
+            // Game over - Lost
+            // Disable input
+            guessInput.disabled = true;
+            // Chance border color
+            guessInput.style.borderColor = 'red';
+            // Set message
+            setMessage(`Game Over, you lost. The correct number was ${winningNum}`, `red`);
+
+        } else {
+            // Game continues - wrong guess
+            // Chance border color
+            guessInput.style.borderColor = 'red';
+            // Clear Input
+            guessInput.value = '';
+            // Set message
+            setMessage(`${guess} is not correct, ${guessesLeft} gesses left`, `red`);
+        }
     }
 });
 
